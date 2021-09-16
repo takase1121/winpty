@@ -1,0 +1,17 @@
+on: [push]
+
+jobs:
+  build:
+    name: Build (MSYS2)
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@v2
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: true
+          install: >-
+            base-devel
+            git
+      - run: ./configure
+      - run: make
