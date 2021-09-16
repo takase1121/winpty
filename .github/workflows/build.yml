@@ -21,6 +21,7 @@ jobs:
       - run: pacman --noconfirm -S ${MINGW_PACKAGE_PREFIX}-gcc
       - run: ./configure
       - run: make PREFIX=build
+      - run: make install-bin
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
