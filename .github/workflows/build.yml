@@ -12,9 +12,9 @@ jobs:
       - uses: msys2/setup-msys2@v2
         with:
           msystem: MINGW64
-          update: true
           install: >-
-            base-devel
-            git
+            msys/gcc
+            mingw64/mingw-w64-x86_64-gcc
+            make
       - run: ./configure
       - run: make
