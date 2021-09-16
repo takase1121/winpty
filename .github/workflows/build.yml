@@ -4,6 +4,9 @@ jobs:
   build:
     name: Build (MSYS2)
     runs-on: windows-2019
+    strategy:
+      matrix:
+        msystem: [MINGW32,MINGW64]
     defaults:
       run:
         shell: msys2 {0}
@@ -11,10 +14,15 @@ jobs:
       - uses: actions/checkout@v2
       - uses: msys2/setup-msys2@v2
         with:
-          msystem: MINGW64
+          msystem: ${{ matrix.msystem }}
           install: >-
             msys/gcc
-            mingw64/mingw-w64-x86_64-gcc
             make
+      - run: pacman --noconfirm -S ${MINGW_PACKAGE_PREFIX}-gcc
       - run: ./configure
-      - run: make
+      - run: make PREFIX=build
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: Windows
+          path: build
