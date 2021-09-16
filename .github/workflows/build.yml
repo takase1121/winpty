@@ -4,6 +4,9 @@ jobs:
   build:
     name: Build (MSYS2)
     runs-on: windows-2019
+    defaults:
+      run:
+        shell: msys2 {0}
     steps:
       - uses: actions/checkout@v2
       - uses: msys2/setup-msys2@v2
