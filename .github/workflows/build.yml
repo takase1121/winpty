@@ -18,8 +18,8 @@ jobs:
           install: >-
             msys/gcc
             make
-      - run: pacman --noconfirm -S ${MINGW_PACKAGE_PREFIX}-gcc
-      - run: ./configure
+      - run: pacman --noconfirm -S ${MINGW_PACKAGE_PREFIX}-g++
+      - run: CXX=${MINGW_PACKAGE_PREFIX}-g++ ./configure
       - run: make PREFIX=build
       - run: make install-bin
       - name: Upload artifacts
